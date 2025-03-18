@@ -10,4 +10,3 @@ streamlit run main.py
 
 
 
----- initial push to remote 

@@ -4,6 +4,8 @@ import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+import matplotlib.dates as mdates
+import plotting
 
 
 # Set the page config
@@ -160,12 +162,16 @@ if selected_file:
             plot_list.append('Scatter Plot')  
             plot_list.append('Line Chart')  
 
+        elif (x_dtype == 'datetime64[ns]' ):
+            plot_list.append('Line Chart')  
+
 
     # If none have been selected, reset the plot list.
     if x_axis == "None" or y_axis == "None":
         plot_list = ['Line Chart', 'Scatter Plot', 'Distribution Plot', 'Count Plot']
 
     plot_type = st.selectbox('Select the type of plot', options=plot_list)
+
 
     # Generate the plot based on user selection
     if st.button('Generate Plot'):
@@ -182,7 +188,10 @@ if selected_file:
             ax.pie(pie_data, labels=pie_data.index, autopct="%1.1f%%", startangle=90, colors=sns.color_palette("pastel"))
 
         elif plot_type == 'Line Chart':
-            sns.lineplot(x=df[x_axis], y=df[y_axis], ax=ax)
+            if(x_dtype == 'datetime64[ns]'):
+                plotting.create_lineChart_Date(df,x_axis,y_axis,ax)
+            else:
+                sns.lineplot(x=df[x_axis], y=df[y_axis], ax=ax)
         elif plot_type == 'Scatter Plot':
             sns.scatterplot(x=df[x_axis], y=df[y_axis], ax=ax)
 
