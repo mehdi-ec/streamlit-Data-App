@@ -1,0 +1,12 @@
+python3 -m venv .venv
+
+.venv\Scripts\activate
+
+pip install streamlit pandas matplotlib seaborn notebook
+
+pip freeze > requirements.txt
+
+streamlit run main.py
+
+
+

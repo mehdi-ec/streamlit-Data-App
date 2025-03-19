@@ -101,6 +101,7 @@ if selected_file:
             for col in choose_cols:
                 if choose_type == 'category':
                     df[col] = df[col].astype('category')
+                    
                 else:
                     df[col] = df[col].astype(choose_type)
 
@@ -189,7 +190,7 @@ if selected_file:
 
         elif plot_type == 'Line Chart':
             if(x_dtype == 'datetime64[ns]'):
-                plotting.create_lineChart_Date(df,x_axis,y_axis,ax)
+                plotting.create_lineChart_Date2(df,x_axis, y_axis, ax)
             else:
                 sns.lineplot(x=df[x_axis], y=df[y_axis], ax=ax)
         elif plot_type == 'Scatter Plot':
